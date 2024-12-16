@@ -162,6 +162,7 @@ func (p *hostPathProvisioner) Provision(options controller.ProvisionOptions) (*v
 				PersistentVolumeReclaimPolicy: v1.PersistentVolumeReclaimDelete,
 				AccessModes: []v1.PersistentVolumeAccessMode{
 					v1.ReadWriteOnce,
+					v1.ReadWriteMany,
 				},
 				Capacity: v1.ResourceList{
 					v1.ResourceName(v1.ResourceStorage): *pvCapacity,
@@ -177,10 +178,10 @@ func (p *hostPathProvisioner) Provision(options controller.ProvisionOptions) (*v
 							{
 								MatchExpressions: []v1.NodeSelectorRequirement{
 									{
-										Key:      "kubernetes.io/hostname",
+										Key:      "node-role.kubernetes.io/vm-host",
 										Operator: v1.NodeSelectorOpIn,
 										Values: []string{
-											p.nodeName,
+											'',
 										},
 									},
 								},
