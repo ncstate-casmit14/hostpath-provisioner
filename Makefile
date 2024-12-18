@@ -15,10 +15,10 @@
 .PHONY: cluster-up cluster-down cluster-sync cluster-clean generate-doc
 
 KUBEVIRT_PROVIDER?=k8s-1.30
-HPP_IMAGE?=hostpath-provisioner
-HPP_CSI_IMAGE?=hostpath-csi-driver
+HPP_IMAGE?=kubevirt-hostpath-provisioner
+HPP_CSI_IMAGE?=kubevirt-hostpath-csi-driver
 TAG?=latest
-DOCKER_REPO?=quay.io/kubevirt
+DOCKER_REPO?=docker-registry.chass.ncsu.edu/chass
 ARTIFACTS_PATH?=_out
 GOOS?=linux
 GOARCH?=amd64
