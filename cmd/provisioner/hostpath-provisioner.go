@@ -181,7 +181,7 @@ func (p *hostPathProvisioner) Provision(options controller.ProvisionOptions) (*v
 										Key:      "node-role.kubernetes.io/vm-host",
 										Operator: v1.NodeSelectorOpIn,
 										Values: []string{
-											'',
+											"",
 										},
 									},
 								},
