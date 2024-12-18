@@ -64,7 +64,7 @@ var provisionerID string
 
 // NewHostPathProvisioner creates a new hostpath provisioner
 func NewHostPathProvisioner() controller.Provisioner {
-	useNamingPrefix := false
+	useNamingPrefix := true
 	nodeName := os.Getenv("NODE_NAME")
 	if nodeName == "" {
 		glog.Fatal("env variable NODE_NAME must be set so that this provisioner can identify itself")
@@ -76,8 +76,8 @@ func NewHostPathProvisioner() controller.Provisioner {
 	if pvDir == "" {
 		glog.Fatal("env variable PV_DIR must be set so that this provisioner knows where to place its data")
 	}
-	if strings.ToLower(os.Getenv("USE_NAMING_PREFIX")) == "true" {
-		useNamingPrefix = true
+	if strings.ToLower(os.Getenv("USE_NAMING_PREFIX")) == "false" {
+		useNamingPrefix = false
 	}
 	glog.Infof("initiating kubevirt/hostpath-provisioner on node: %s\n", nodeName)
 	provisionerName = "kubevirt.io/hostpath-provisioner"
@@ -181,7 +181,7 @@ func (p *hostPathProvisioner) Provision(options controller.ProvisionOptions) (*v
 										Key:      "node-role.kubernetes.io/vm-host",
 										Operator: v1.NodeSelectorOpIn,
 										Values: []string{
-											'',
+											"",
 										},
 									},
 								},
